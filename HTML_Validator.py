@@ -36,7 +36,7 @@ def validate_html(html):
     if (len(s) != 0):
         return False
     else:
-        return Tr
+        return True
         if symbol in "<":
             s.append(symbol)
         else:

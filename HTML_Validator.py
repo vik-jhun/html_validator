@@ -17,7 +17,6 @@ def validate_html(html):
     balanced = True
     i = 0
     while i < len(s)-1:
-#n   for index in range(len(symbol_string)):
         left = s[i]
         right = "<" + "/" + left[1:]
         if s[i+1] != right:

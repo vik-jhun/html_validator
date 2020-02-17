@@ -1,8 +1,8 @@
-def par_checker(symbol_string):
+def validate_html(html):
     '''
-    >>> par_checker('<></>')
+    >>> validate_html('<></>')
     True
-    >>> par_checker('<></')
+    >>> validate_html('<></')
     False
     '''
     s = _extract_tags(html)

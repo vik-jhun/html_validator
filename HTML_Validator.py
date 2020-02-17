@@ -1,42 +1,41 @@
-#!/bin/python3
 def par_checker(symbol_string):
-'''
->>> par_checker('<strong></strong>')
-True
->>> par_checker('<strong><strong')
-False
-'''
-s = _extract_tags(html)
-balanced = True
-i = 0
-while i < len(s)-1:
-    opening = s[i]
-    closing = "<" + "/" + opening[1:]
-    if s[i+1] != closing:
-        opening = s[i+1]
+    '''
+    >>> par_checker('<></>')
+    True
+    >>> par_checker('<></')
+    False
+    '''
+    s = _extract_tags(html)
+    balanced = True
+    i = 0
+    while i < len(s)-1:
+        opening = s[i]
         closing = "<" + "/" + opening[1:]
-        i+=1
-    else:
-        s.remove(opening)
-        s.remove(closing)
-if (len(s) != 0):
-    return False
-else:
-    return True
-    if symbol in "<":
-        s.append(symbol)
-    else:
-        if s == []:
-            balanced = False
+        if s[i+1] != closing:
+            opening = s[i+1]
+            closing = "<" + "/" + opening[1:]
+            i+=1
         else:
-            top = s.pop()
-            if not matches(opening,closing):
+            s.remove(opening)
+            s.remove(closing)
+    if (len(s) != 0):
+        return False
+    else:
+        return True
+        if symbol in "<":
+            s.append(symbol)
+        else:
+            if s == []:
                 balanced = False
-    index += 1
-if balanced and s == []:
-    return True
-else:
-    return False
+            else:
+                top = s.pop()
+                if not matches(opening,closing):
+                    balanced = False
+        index += 1
+    if balanced and s == []:
+        return True
+    else:
+        return False
 
 def _matches(opening, closing):
     openings = "<"

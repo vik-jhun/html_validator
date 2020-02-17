@@ -1,6 +1,3 @@
-#!/bin/python3
-
-
 def validate_html(html):
     '''
     This function performs a limited version of html validation by checking whether every opening tag has a corresponding closing tag.
@@ -18,20 +15,20 @@ def validate_html(html):
 
     s = _extract_tags(html)
     balanced = True
-    index = 0
+    i = 0
     while i < len(s)-1:
 #n   for index in range(len(symbol_string)):
-        opening = s[i]
-        closing = "<" + "/" + opening[1:]
-        if s[i+1] != closing:
-            opening = s[i+1]
-            closing = "<" + "/" + opening[1:]
+        left = s[i]
+        right = "<" + "/" + left[1:]
+        if s[i+1] != right:
+            left = s[i+1]
+            right = "<" + "/" + left[1:]
             i+=1
-            if opening[1:2] == '/':
+            if left[1:2] == '/':
                 return False
         else:
-            s.remove(opening)
-            s.remove(closing)
+            s.remove(left)
+            s.remove(right)
             i = 0
         print(s)
     print(s)
@@ -39,15 +36,15 @@ def validate_html(html):
     if (len(s) != 0):
         return False
     else:
-        return True
+        return Tr
         if symbol in "<":
             s.append(symbol)
         else:
             if s == []:
                 balanced = False
             else:
-                first = s.pop()
-                if not matches(first,symbol):
+                top = s.pop()
+                if not matches(top,symbol):
                     balanced = False
         index = index + 1
     if balanced and s == []:
@@ -55,10 +52,10 @@ def validate_html(html):
     else:
         return False
 
-def _matches(opening, closing):
-    openings = "<"
-    closings = ">"
-    return openings.index(opening) == closings.index(closing)
+def _matches(left, right):
+    lefts = "<"
+    rights = ">"
+    return lefts.index(left) == rights.index(right)
 
 
 

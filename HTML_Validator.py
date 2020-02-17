@@ -1,23 +1,41 @@
+#!/bin/python3
+
+
 def validate_html(html):
     '''
-    >>> validate_html('<></>')
+    This function performs a limited version of html validation by checking whether every opening tag has a corresponding closing tag.
+    >>> validate_html('<strong>example</strong>')
     True
-    >>> validate_html('<></')
+    >>> validate_html('<strong>example')
     False
     '''
+
+    # HINT:
+    # use the _extract_tags function below to generate a list of html tags without any extra text;
+    # then process these html tags using the balanced parentheses algorithm from the book
+    # the main difference between your code and the book's code will be that you will have to keep track of not just the 3 types of parentheses,
+    # but arbitrary text located between the html tags
+
     s = _extract_tags(html)
     balanced = True
-    i = 0
+    index = 0
     while i < len(s)-1:
+#n   for index in range(len(symbol_string)):
         opening = s[i]
         closing = "<" + "/" + opening[1:]
         if s[i+1] != closing:
             opening = s[i+1]
             closing = "<" + "/" + opening[1:]
             i+=1
+            if opening[1:2] == '/':
+                return False
         else:
             s.remove(opening)
             s.remove(closing)
+            i = 0
+        print(s)
+    print(s)
+
     if (len(s) != 0):
         return False
     else:
@@ -28,10 +46,10 @@ def validate_html(html):
             if s == []:
                 balanced = False
             else:
-                top = s.pop()
-                if not matches(opening,closing):
+                first = s.pop()
+                if not matches(first,symbol):
                     balanced = False
-        index += 1
+        index = index + 1
     if balanced and s == []:
         return True
     else:
@@ -41,6 +59,9 @@ def _matches(opening, closing):
     openings = "<"
     closings = ">"
     return openings.index(opening) == closings.index(closing)
+
+
+
 
 def _extract_tags(html):
     '''
@@ -52,14 +73,16 @@ def _extract_tags(html):
     ['<strong>', '</strong>']
     '''
     s=[]
-    for i in range(len(html)):     #makes i a number unlike for i in html, so helps in indexing
+    for i in range(len(html)):
         temp = ''
-        character = html[i]
-        if character == '<' :
-            while character != '>':
-                temp += character
+        symbol = html[i]
+        if symbol == '<' :
+            while symbol != '>':
+                temp += symbol
                 i = i+1
-                character = html[i]
+                symbol = html[i]
             temp += '>'
             s.append(temp)
     return s
+
+print(_extract_tags('<whatever>hello<whatever/>'))
